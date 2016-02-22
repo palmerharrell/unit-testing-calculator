@@ -22,51 +22,49 @@ function calculate(func, num1, num2) {
 
 // Math Functions
 function add(num1, num2) {
-	$("#inputText").val(``);
 	return num1 + num2;
 }
 
 function subtract(num1, num2) {
-	$("#inputText").val(``);
 	return num1 - num2;
 }
 
 function multiply(num1, num2) {
-	$("#inputText").val(``);
 	return num1 * num2;
 }
 
 function divide(num1, num2) {
-	$("#inputText").val(``);
 	return num1 / num2;
 }
 
 function square(num) {
-	$("#inputText").val(``);
 	return Math.pow(num, 2);
 }
 
 function squareRoot(num) {
-	$("#inputText").val(``);
 	return Math.sqrt(num);
 }
 
 // Button Event Listeners
-$("#add").click(function() {
-	mathFunction = "add";
+$(".twoNums").click(function() {
+	mathFunction = $(this).attr("id");
 	number1 = parseInt($("#inputText").val());
 	$("#inputText").val("");
 	$("#inputText").attr("placeholder", "Enter 2nd number");
 });
 
-$("#subtract").click(function() {
-	mathFunction = "subtract";
+$(".oneNum").click(function() {
+	mathFunction = $(this).attr("id");
 	number1 = parseInt($("#inputText").val());
-	$("#inputText").val("");
-	$("#inputText").attr("placeholder", "Enter 2nd number");
+	number2 = "N/A";
+	if (mathFunction === "square") {
+		calculate(square, number1);
+	} else if (mathFunction === "squareRoot") {
+		calculate(squareRoot, number1);
+	};
 });
 
-// Get 2nd number, if necessary, and pass math function and numbers to calculate
+// Get 2nd number, pass math function and numbers to calculate function
 $("#inputText").keyup(function(e) {
 	if (e.keyCode == 13) {
 		if (mathFunction === "add") {
@@ -81,12 +79,6 @@ $("#inputText").keyup(function(e) {
 		} else if (mathFunction === "divide") {
 			number2 = parseInt($("#inputText").val());
 			calculate(divide, number1, number2);
-		} else if (mathFunction === "square") {
-			number2 = "N/A";
-			calculate(square, number1);
-		} else if (mathFunction === "squareRoot") {
-			number2 = "N/A";
-			calculate(squareRoot, number1);
 		};
 	};
 });
